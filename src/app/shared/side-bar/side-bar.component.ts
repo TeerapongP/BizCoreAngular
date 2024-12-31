@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { SummaryBusinessOverviewComponent } from '../../component/dash-board/summary-business-overview/summary-business-overview.component';
 
 @Component({
   selector: 'app-side-bar',
@@ -9,9 +8,10 @@ import { SummaryBusinessOverviewComponent } from '../../component/dash-board/sum
 })
 export class SideBarComponent {
 
-  @Output() isSidebarExpandedChange: EventEmitter<boolean> = new EventEmitter();
 
-  isSidebarExpanded: boolean = false;
+  @Output() isSidebarExpandedChange = new EventEmitter<boolean>();
+
+  isSidebarExpanded = false;
 
   public toggleSidebar() {
     this.isSidebarExpanded = !this.isSidebarExpanded;
@@ -23,8 +23,20 @@ export class SideBarComponent {
     this.menuItems[index]['isOpen'] = !this.menuItems[index]['isOpen'];
   }
 
+  public onKeydown(event: KeyboardEvent, menuIndex: number, subMenuIndex?: number) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      // ทำงานเมื่อผู้ใช้กด Enter หรือ Space
+      if (subMenuIndex !== undefined) {
+        this.selectSubMenuItem(menuIndex, subMenuIndex);
+      } else {
+        this.toggleSubMenu(menuIndex);
+      }
+    }
+  }
+
+
   // Select a sub-menu item
-  selectSubMenuItem(menuItemIndex: number, subItemIndex: number) {
+  public selectSubMenuItem(menuItemIndex: number, subItemIndex: number) {
     // Set the selected sub-menu item
     // Set the selected sub-menu item
     this.menuItems[menuItemIndex]['selectedSubMenuItem'] = subItemIndex;
