@@ -18,17 +18,17 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: "18"
 
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
       - name: Run ESLint to check for Best Practices
-        run: npm run lint  # ตรวจสอบการตั้งค่า lint ที่กำหนดใน package.json
+        run: npm run lint # ตรวจสอบการตั้งค่า lint ที่กำหนดใน package.json
 
   test:
     runs-on: ubuntu-latest
-    needs: lint  # ให้รันหลังจาก job lint สำเร็จ
+    needs: lint # ให้รันหลังจาก job lint สำเร็จ
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -36,10 +36,10 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: "18"
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Install Chromium (สำหรับ ChromeHeadless)
         run: |
@@ -51,7 +51,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    needs: test  # ให้รันหลังจาก job test สำเร็จ
+    needs: test # ให้รันหลังจาก job test สำเร็จ
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -59,7 +59,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: "18"
 
       - name: Install dependencies
         run: npm install
@@ -69,8 +69,8 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build  # ให้รันหลังจาก job build สำเร็จ
-    if: github.ref == 'refs/heads/develop'  # Deploy เฉพาะเมื่ออยู่ที่สาขา develop
+    needs: build # ให้รันหลังจาก job build สำเร็จ
+    if: github.ref == 'refs/heads/develop' # Deploy เฉพาะเมื่ออยู่ที่สาขา develop
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -78,7 +78,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: "18"
 
       - name: Install dependencies
         run: npm install
