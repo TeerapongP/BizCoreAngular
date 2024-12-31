@@ -1,0 +1,141 @@
+/* Sidebar Links */
+.sidebar-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-links li {
+    margin: 10px 0;
+}
+
+.sidebar-links li a:hover {
+    background: #fff;
+    color: #161a2d;
+}
+
+/* Submenu Styles */
+.sub-menu {
+    list-style: none;
+    padding-left: 20px;
+    margin: 5px 0;
+    display: none; /* Hidden by default */
+}
+
+.sub-menu.open {
+    display: block; /* Show submenu when clicked */
+}
+
+.sub-menu li a {
+    color: #bfbfbf;
+    font-size: 0.9rem;
+    padding: 5px 20px;
+    display: block;
+    text-decoration: none;
+    transition:
+        color 0.2s ease,
+        background 0.2s ease;
+}
+
+.sub-menu li a:hover {
+    color: #161a2d;
+    background: #fff;
+    border-radius: 4px;
+}
+
+/* User Account Section */
+.user-account {
+    margin-top: auto;
+    padding: 20px;
+    text-align: center;
+    color: #fff;
+}
+
+.user-profile h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 5px 0;
+}
+
+.user-profile span {
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+/* Toggle Button */
+.sidebar-toggle-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    transition: left 0.4s ease;
+}
+
+.sidebar-toggle-btn.expanded {
+    left: 13.5%; /* Match sidebar expanded width */
+}
+
+/* Scrollbar styles for Sidebar */
+.sidebar-links {
+    max-height: calc(100vh - 150px); /* Adjust for header and footer */
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #888 #161a2d;
+}
+
+.sidebar-links::-webkit-scrollbar {
+    width: 5px;
+}
+
+.sidebar-links::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+}
+
+.sidebar-links::-webkit-scrollbar-track {
+    background-color: #161a2d;
+}
+
+/* Sub-menu item hover effect */
+.sub-menu li a:hover {
+    color: #161a2d;
+    background: #fff;
+    border-radius: 4px;
+}
+
+/* Highlight the selected sub-menu item */
+.sub-menu li a.selected {
+    background-color: white;
+    color: #161a2d;
+    border-radius: 4px;
+}
+/* ทำให้ปุ่ม hamburger อยู่ในตำแหน่งที่เหมาะสม */
+.sidebar-toggle-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+}
+
+::ng-deep .p-button {
+    border: none; /* ลบขอบของปุ่ม */
+    background-color: transparent; /* ทำให้พื้นหลังโปร่งใส */
+}
+
+/* ขนาดปุ่มในมือถือ */
+@media screen and (max-width: 768px) {
+    .sidebar-toggle-btn {
+        top: 15px;
+        left: 15px;
+    }
+}
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .sidebar.expanded {
+        width: 60%; /* Wider on smaller screens */
+    }
+
+    .sidebar-toggle-btn.expanded {
+        left: 60%; /* Match sidebar width */
+    }
+}

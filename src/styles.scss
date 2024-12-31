@@ -1,4 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+/* Tailwind's base, components, and utilities */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Define the Prompt-Black font */
+@font-face {
+    font-family: "Sarabun-Medium"; /* ชื่อฟอนต์ที่คุณกำหนด */
+    src: url("assets/fonts/Sarabun-Medium.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Apply the font globally */
+* {
+    font-family: "Sarabun-Medium", sans-serif; /* ใช้ชื่อฟอนต์ที่ตรงกับที่กำหนด */
+    font-size: 16px; /* ขนาดฟอนต์ 16px สำหรับทุกองค์ประกอบ */
+}
