@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { SummaryBusinessOverviewComponent } from '../../component/dash-board/summary-business-overview/summary-business-overview.component';
 
 @Component({
   selector: 'app-side-bar',
@@ -7,10 +8,14 @@ import { MenuItem } from 'primeng/api';
   styleUrl: './side-bar.component.scss'
 })
 export class SideBarComponent {
+
+  @Output() isSidebarExpandedChange: EventEmitter<boolean> = new EventEmitter();
+
   isSidebarExpanded: boolean = false;
 
   public toggleSidebar() {
     this.isSidebarExpanded = !this.isSidebarExpanded;
+    this.isSidebarExpandedChange.emit(this.isSidebarExpanded);
   }
 
   public toggleSubMenu(index: number) {
@@ -35,12 +40,12 @@ export class SideBarComponent {
   menuItems: MenuItem[] = [
     {
       label: 'แดชบอร์ด (Dashboard)',
-      icon: 'pi pi-home',
-      isOpen: false, // Submenu toggle state
-      selectedSubMenuItem: null, // Track selected sub-menu item
+      icon: 'pi pi-home', // Icon for the dashboard menu
+      isOpen: false, // State of the submenu (whether it is open or closed)
+      selectedSubMenuItem: null, // Tracks the selected submenu item
       items: [
-        { label: 'สรุปภาพรวมทางธุรกิจ' },
-        { label: 'กราฟและข้อมูลเชิงวิเคราะห์' }
+        { label: 'สรุปภาพรวมทางธุรกิจ', routerLink: '/dashboard/summaryBusinessOverview' },
+        { label: 'กราฟและข้อมูลเชิงวิเคราะห์', routerLink: '/dashboard/analyticsGraphs' }
       ]
     },
     {
