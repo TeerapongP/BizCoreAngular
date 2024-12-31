@@ -3,9 +3,9 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("flowbite/plugin")],
   corePlugins: {
-    preflight: false,
+    preflight: false, // Disables Tailwind's base styles
   },
   prefix: "tw-", // Add the 'tw-' prefix to all classes
 };
