@@ -11,9 +11,9 @@
                 <i class="pi pi-times tw-text-base tw-text-white"></i>
             </p-button>
         </div>
-        <ul class="sidebar-links ">
+        <ul class="sidebar-links">
             <li *ngFor="let menuItem of menuItems; let i = index" class="sidebar-links">
-                <a (click)="toggleSubMenu(i)"
+                <a (click)="toggleSubMenu(i)" (keydown)="onKeydown($event, i)" tabindex="0"
                     class="tw-flex tw-items-center tw-justify-between tw-text-white tw-px-5 tw-py-2.5 tw-rounded-lg tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-in-out tw-word-wrap tw-break-words tw-hyphens-auto">
                     <span class="tw-flex tw-items-center">
                         <i class="{{ menuItem.icon }}" class="tw-mr-2"></i>
@@ -25,14 +25,14 @@
                 <ul class="sub-menu" [ngClass]="{'open': menuItems[i]['isOpen']}">
                     <li *ngFor="let subItem of menuItem.items; let j = index">
                         <a [routerLink]="subItem.routerLink" (click)="selectSubMenuItem(i, j)"
-                            [ngClass]="{'selected': menuItem['selectedSubMenuItem'] === j}">
+                            [ngClass]="{'selected': menuItem['selectedSubMenuItem'] === j}"
+                            (keydown)="onKeydown($event, i, j)">
                             {{ subItem.label }}
                         </a>
                     </li>
                 </ul>
             </li>
         </ul>
-
         <div class="user-account">
             <div class="user-profile">
                 <h3>Eva Murphy</h3>
