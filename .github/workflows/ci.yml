@@ -21,7 +21,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Run ESLint to check for Best Practices
         run: npm run lint  # ตรวจสอบการตั้งค่า lint ที่กำหนดใน package.json
