@@ -1,2 +1,10 @@
-<app-side-bar></app-side-bar>
-<router-outlet></router-outlet>
+<div class="tw-flex tw-h-screen">
+    <!-- Sidebar -->
+    <app-side-bar (isSidebarExpandedChange)="isSidebarExpandedFromChild($event)"></app-side-bar>
+
+    <!-- Main content -->
+    <div [class.tw-ml-64]="isSidebarExpanded" [class.tw-ml-0]="!isSidebarExpanded"
+        class="tw-flex-1 tw-p-5 tw-overflow-auto tw-transition-all tw-duration-300 tw-ease-in-out">
+        <router-outlet></router-outlet>
+    </div>
+</div>

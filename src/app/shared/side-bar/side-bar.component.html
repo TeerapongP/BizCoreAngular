@@ -4,31 +4,27 @@
         [ngClass]="{'tw-w-[15%]': isSidebarExpanded, 'tw-w-0': !isSidebarExpanded}">
         <div class="tw-flex tw-items-center tw-justify-between tw-px-5 tw-w-full">
             <!-- Sidebar Title centered -->
-            <h1 class="tw-text-white tw-text-start tw-text-[24px] tw-font-semibold tw-flex-1">
-                BizCore
-            </h1>
+            <a routerLink="/"
+                class="tw-text-white tw-text-start tw-text-[24px] tw-font-semibold tw-flex-1 tw-no-underline	">BizCore</a>
             <!-- Close Sidebar Button on the right -->
             <p-button id="close-sidebar" (click)="toggleSidebar()">
                 <i class="pi pi-times tw-text-base tw-text-white"></i>
-
             </p-button>
         </div>
-
-
-        <ul class="sidebar-links tw-list-none tw-p-0 tw-m-0">
-            <li *ngFor="let menuItem of menuItems; let i = index" class="tw-my-2.5">
+        <ul class="sidebar-links ">
+            <li *ngFor="let menuItem of menuItems; let i = index" class="sidebar-links">
                 <a (click)="toggleSubMenu(i)"
                     class="tw-flex tw-items-center tw-justify-between tw-text-white tw-px-5 tw-py-2.5 tw-rounded-lg tw-cursor-pointer tw-transition-all tw-duration-300 tw-ease-in-out tw-word-wrap tw-break-words tw-hyphens-auto">
                     <span class="tw-flex tw-items-center">
                         <i class="{{ menuItem.icon }}" class="tw-mr-2"></i>
                         {{ menuItem.label }}
                     </span>
-                    <i class="pi pi-chevron-down"></i>
+                    <i class="pi pi-chevron-down tw-ml-5"></i>
                 </a>
 
                 <ul class="sub-menu" [ngClass]="{'open': menuItems[i]['isOpen']}">
                     <li *ngFor="let subItem of menuItem.items; let j = index">
-                        <a href="#" (click)="selectSubMenuItem(i, j)"
+                        <a [routerLink]="subItem.routerLink" (click)="selectSubMenuItem(i, j)"
                             [ngClass]="{'selected': menuItem['selectedSubMenuItem'] === j}">
                             {{ subItem.label }}
                         </a>
@@ -46,9 +42,11 @@
     </aside>
 
     <!-- Hamburger Button (Toggle Sidebar) -->
-    <p-button (click)="toggleSidebar()" [ngClass]="{'expanded': isSidebarExpanded}">
-        <i class="pi pi-bars tw-text-2xl tw-text-black"></i>
-    </p-button>
+    <div class="tw-mt-6">
+        <p-button (click)="toggleSidebar()" [ngClass]="{'expanded': isSidebarExpanded}">
+            <i class="pi pi-bars tw-text-2xl tw-text-black "></i>
+        </p-button>
+    </div>
 
 
 </div>
