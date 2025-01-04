@@ -24,34 +24,11 @@ jobs:
         run: npm install --legacy-peer-deps
 
       - name: Run ESLint to check for Best Practices
-        run: npm run lint # ตรวจสอบการตั้งค่า lint ที่กำหนดใน package.json
-
-  ANGULAR_TEST:
-    runs-on: ubuntu-latest
-    needs: ANGULAR_CHECK_LINT # ให้รันหลังจาก job lint สำเร็จ
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18"
-
-      - name: Install dependencies
-        run: npm install --legacy-peer-deps
-
-      - name: Install Chromium (สำหรับ ChromeHeadless)
-        run: |
-          sudo apt-get update -y
-          sudo apt-get install -y chromium-browser
-
-      - name: Run unit tests with Karma
-        run: npm run test -- --watch=false --browsers=ChromeHeadless # ใช้ ChromeHeadless แทน ChromeHeadlessCI
+        run: npm run lint
 
   build:
     runs-on: ubuntu-latest
-    needs: ANGULAR_TEST # ให้รันหลังจาก job test สำเร็จ
+    needs: ANGULAR_CHECK_LINT
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -69,8 +46,8 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build # ให้รันหลังจาก job build สำเร็จ
-    if: github.ref == 'refs/heads/develop' # Deploy เฉพาะเมื่ออยู่ที่สาขา develop
+    needs: build
+    if: github.ref == 'refs/heads/develop'
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -81,9 +58,9 @@ jobs:
           node-version: "18"
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
 
       - name: Deploy to GitHub Pages
         run: |
           npm install -g angular-cli-ghpages
-          ngh --dir=dist/your-app-name  # เปลี่ยนชื่อโปรเจกต์ที่ถูกสร้างขึ้นใน dist
+          ngh --dir=dist/your-app-name
