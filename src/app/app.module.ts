@@ -13,7 +13,7 @@ import { AnalyticsGraphsComponent } from './component/dash-board/analytics-graph
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

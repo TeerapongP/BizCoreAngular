@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TableModule } from 'primeng/table';
 
 import { SideBarComponent } from './side-bar/side-bar.component';
 
@@ -15,7 +16,7 @@ import { MenubarModule } from 'primeng/menubar';
 
 @NgModule({
   declarations: [
-    // Import Components    
+    // Import Components
     SideBarComponent
   ],
   imports: [
@@ -29,11 +30,21 @@ import { MenubarModule } from 'primeng/menubar';
     PanelMenuModule,
     MenubarModule,
     SidebarModule,
-
-
+    TableModule
   ],
   exports: [
-    SideBarComponent
+    SideBarComponent,
+
+    // Export PrimeNG modules
+    TableModule,
+    ButtonModule,
+    ToastModule,
+    BrowserAnimationsModule,
+    MenuModule,
+    TieredMenuModule,
+    PanelMenuModule,
+    MenubarModule,
+    SidebarModule,
   ]
 })
 export class SharedModule { }
