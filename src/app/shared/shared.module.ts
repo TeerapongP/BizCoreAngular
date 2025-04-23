@@ -1,3 +1,4 @@
+import { TableModule } from 'primeng/table';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -15,7 +16,7 @@ import { MenubarModule } from 'primeng/menubar';
 
 @NgModule({
   declarations: [
-    // Import Components    
+    // Import Components
     SideBarComponent
   ],
   imports: [
@@ -29,8 +30,7 @@ import { MenubarModule } from 'primeng/menubar';
     PanelMenuModule,
     MenubarModule,
     SidebarModule,
-
-
+    TableModule,
   ],
   exports: [
     SideBarComponent
