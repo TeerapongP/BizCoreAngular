@@ -42,12 +42,12 @@ jobs:
         run: npm install --legacy-peer-deps
 
       - name: Build the Angular app
-        run: npm run build --prod  # ใช้ --prod เพื่อ build ในโหมด production
+        run: npm run build --prod
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build  # รันหลังจาก job build สำเร็จ
-    if: github.ref == 'refs/heads/develop'  # Deploy เฉพาะเมื่ออยู่ที่สาขา develop
+    needs: build
+    if: github.event_name == 'pull_request'  # ทำเฉพาะเวลามี PR
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -63,4 +63,15 @@ jobs:
       - name: Deploy to GitHub Pages
         run: |
           npm install -g angular-cli-ghpages
-          ngh --dir=dist/BizCoreAngular --base-href=/BizCoreAngular/  # ใช้ base-href หากแอปอยู่ใน subdirectory
+          ngh --dir=dist/BizCoreAngular --base-href=/BizCoreAngular/
+
+      - name: Comment on the Pull Request
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: "🚀 ระบบได้ Build และ Deploy เสร็จสิ้นเรียบร้อยแล้วครับ!"
+            })
